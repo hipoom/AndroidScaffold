@@ -5,10 +5,13 @@ package me.haipeng.scaffold.app
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.databinding.DataBindingUtil
 import me.haipeng.scaffold.app.databinding.ActivityMainBinding
 import me.haipeng.scaffold.core.dimension.dip
-import me.haipeng.scaffold.core.drawable.drawable
+import me.haipeng.scaffold.core.drawable.background
+import me.haipeng.scaffold.core.style.ButtonStyle
+import me.haipeng.scaffold.core.style.ColorStyle
+import me.haipeng.scaffold.core.style.apply
+import me.haipeng.scaffold.core.style.withDefaultStyle
 
 /**
  * 这是一个示例 app，用于展示 AndroidScaffold 的各个功能。
@@ -36,10 +39,7 @@ class MainActivity : AppCompatActivity() {
 
         setContentView(binding.root)
 
-        binding.test.background = drawable {
-            radius = dip(4F)
-            color = Color.BLUE
-        }
+        binding.test.withDefaultStyle()
     }
 
 

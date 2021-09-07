@@ -93,7 +93,7 @@ class DrawableBuilder {
     /**
      * 创建圆角的贝塞尔顶点。
      */
-    private fun createCornerRadii(): FloatArray? {
+    internal fun createCornerRadii(): FloatArray? {
         val radiusBox = radiusBox
 
         // 没有设置统一圆角  也没有 设置单独某个角的圆角   ->  null
