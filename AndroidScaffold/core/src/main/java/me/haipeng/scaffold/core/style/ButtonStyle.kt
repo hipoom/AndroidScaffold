@@ -3,7 +3,6 @@
 package me.haipeng.scaffold.core.style
 
 import android.graphics.Color
-import android.widget.Button
 import android.widget.TextView
 import androidx.annotation.ColorInt
 import androidx.annotation.Dimension
@@ -16,33 +15,33 @@ import me.haipeng.scaffold.core.drawable.background
  * @author ZhengHaiPeng
  * @since 2021/9/7 23:23
  */
-data class ButtonStyle(
+open class ButtonStyle (
 
     /**
      * 背景颜色
      */
     @ColorInt
-    val backgroundColor: Int,
+    var backgroundColor: Int? = null,
 
     /**
      * 边框颜色
      */
     @ColorInt
-    val strokeColor: Int,
+    var strokeColor: Int? = null,
 
     /**
      * 文字颜色
      */
     @ColorInt
-    val textColor: Int,
+    var textColor: Int? = null,
 
     /**
      * 圆角半径
      */
     @Dimension(unit = Dimension.DP)
-    val radius: Float
+    var radius: Float? = null
 
-) {companion object {var default = roundedRect} }
+) { companion object {var default = roundedRect} }
 
 
 /* ======================================================= */
@@ -64,14 +63,14 @@ val ButtonStyle.Companion.roundedRect: ButtonStyle
 fun <V: TextView> ButtonStyle.apply(view: V): V {
     val self = this
     view.background {
-        color = self.backgroundColor
-        radius = view.dip(self.radius)
+        color = self.backgroundColor ?: color
+        radius = view.dip(self.radius ?: 0F)
         stroke {
-            color = self.strokeColor
+            color = self.strokeColor ?: color
             width = view.dip(0.5F)
         }
     }
-    view.setTextColor(self.textColor)
+    self.textColor?.let { view.setTextColor(it) }
     return view
 }
 

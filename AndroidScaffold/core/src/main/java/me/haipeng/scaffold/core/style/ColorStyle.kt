@@ -3,6 +3,9 @@ package me.haipeng.scaffold.core.style
 
 import android.graphics.Color
 import androidx.annotation.ColorInt
+import androidx.core.graphics.blue
+import androidx.core.graphics.green
+import androidx.core.graphics.red
 
 /**
  * 颜色主题。
@@ -48,6 +51,9 @@ val ColorStyle.Companion.blue: ColorStyle
 val ColorStyle.Companion.green: ColorStyle
     get() = ColorStyle("#4caf50".color, "#388e3c".color, "#e8f5e9".color)
 
+val ColorStyle.Companion.white: ColorStyle
+    get() = ColorStyle("#FFFFFF".color, "#EEEEEE".color, "#DDDDDD".color)
+
 /** 简书主题色 */
 val ColorStyle.Companion.jianshu: ColorStyle
     get() = ColorStyle("#CE7B66".color, "#E96A51".color, "#EAB3A7".color)
@@ -60,6 +66,19 @@ val ColorStyle.Companion.zhihu: ColorStyle
 val ColorStyle.Companion.amap: ColorStyle
     get() = ColorStyle("#4287FF".color, "#4365CC".color, blue.accent)
 
-
-private val String.color: Int
+val String.color: Int
     get() = Color.parseColor(this)
+
+/** 一根黑色的分割线，用于明亮的底色 */
+private val darkDividerColor = "#1F000000".color
+
+/** 一根白色的分割线，用于深色的底色 */
+private val lightDividerColor = "#1FFFFFFF".color
+
+/**
+ * 判断一个颜色是亮色还是暗色。
+ */
+fun Int.isLightColor(): Boolean {
+    val lightness = (0.299 * red + 0.587 * green + 0.114 * blue) / 255
+    return lightness >= 0.5
+}

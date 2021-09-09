@@ -3,14 +3,15 @@
 package me.haipeng.scaffold.core.drawable
 
 import android.content.res.ColorStateList
-import android.graphics.Color
-import android.graphics.Paint
+import android.graphics.*
 import android.graphics.drawable.Drawable
 import android.graphics.drawable.GradientDrawable
 import android.graphics.drawable.RippleDrawable
 import android.graphics.drawable.ShapeDrawable
 import android.graphics.drawable.shapes.RoundRectShape
+import android.os.Build
 import androidx.annotation.ColorInt
+
 
 /**
  * 这个方法用于方便地创建一个 Drawable 对象，减少繁杂的 shape.xml 文件。
@@ -49,4 +50,13 @@ fun Drawable.createRippleDrawable(@ColorInt color: Int = Color.parseColor("#2000
     mask.paint.style = Paint.Style.FILL
 
     return RippleDrawable(colorStateList, this, mask)
+}
+
+fun Drawable.setColorFilterCompat(@ColorInt color: Int, mode: PorterDuff.Mode = PorterDuff.Mode.SRC_ATOP) {
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+        this.colorFilter = BlendModeColorFilter(color, BlendMode.SRC_ATOP)
+    }
+    else {
+        this.setColorFilter(color, PorterDuff.Mode.SRC_ATOP);
+    }
 }
