@@ -24,3 +24,5 @@ Java 版本: Java8 及以上
 
 ## 版本
 
+
+[核心代码](./AndroidScaffold/core/src/main/java/me/haipeng/scaffold/core)
