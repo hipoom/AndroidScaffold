@@ -22,9 +22,8 @@ class ToolbarStyle {
     /* Fields                                                  */
     /* ======================================================= */
 
-    var title           : String? = null
-    var titleColor      : Int? = null
-    var icon            : IconStyle? = null
+    var title : TextStyle? = null
+    var icon : IconStyle? = null
     var backgroundColor : Int? = null
 
 
@@ -44,6 +43,14 @@ class ToolbarStyle {
         }
     }
 
+    /**
+     * 设置标题
+     */
+    fun title(builder: TextStyle.() -> Unit) {
+        this.title = this.title ?: TextStyle()
+        builder(this.title!!)
+    }
+
     fun apply(activity: AppCompatActivity, toolbar: Toolbar) {
         // Toolbar 的背景色
         backgroundColor = backgroundColor ?: ColorStyle.default.primary
@@ -53,13 +60,13 @@ class ToolbarStyle {
         val isLightBackground = backgroundColor!!.isLightColor()
 
         // 标题文字
-        toolbar.title = title
+        toolbar.title = title?.text
 
         // 标题颜色
-        if (titleColor == null) {
-            titleColor = if (isLightBackground) TextColorStyle.black.normal else TextColorStyle.white.normal
+        title = (title ?: TextStyle()).apply {
+            color = color ?: if (isLightBackground) TextColorStyle.black.normal else TextColorStyle.white.normal
         }
-        toolbar.setTitleTextColor(titleColor!!)
+        toolbar.setTitleTextColor(title!!.color!!)
 
         // 如果需要 icon 信息
         if (icon?.enable == true) {
@@ -70,7 +77,7 @@ class ToolbarStyle {
             }
 
             ContextCompat.getDrawable(activity, R.drawable.abc_ic_ab_back_material)?.apply {
-                setColorFilterCompat(titleColor!!)
+                setColorFilterCompat(title?.color!!)
                 activity.supportActionBar?.setHomeAsUpIndicator(this)
             }
         }
@@ -82,8 +89,8 @@ class ToolbarStyle {
     /* Inner Class                                             */
     /* ======================================================= */
 
-    class IconStyle(
-        var enable: Boolean = true,
+    class IconStyle (
+        var enable: Boolean? = null,
         var color: Int? = null
     )
 }

@@ -18,6 +18,11 @@ import me.haipeng.scaffold.core.drawable.background
 open class ButtonStyle (
 
     /**
+     * 文本风格
+     */
+    var title: TextStyle? = null,
+
+    /**
      * 背景颜色
      */
     @ColorInt
@@ -30,18 +35,50 @@ open class ButtonStyle (
     var strokeColor: Int? = null,
 
     /**
-     * 文字颜色
-     */
-    @ColorInt
-    var textColor: Int? = null,
-
-    /**
      * 圆角半径
      */
     @Dimension(unit = Dimension.DP)
     var radius: Float? = null
 
-) { companion object {var default = roundedRect} }
+) {
+    companion object {var default = roundedRect}
+
+    /**
+     * 应用到控件上。
+     */
+    open fun <V: TextView> apply(view: V): V {
+        val self = this
+        view.background {
+            color = self.backgroundColor ?: color
+            radius = view.dip(self.radius ?: 0F)
+            stroke {
+                color = self.strokeColor ?: color
+                width = view.dip(0.5F)
+            }
+        }
+
+        // 如果没有指定文字颜色，设置默认的文字颜色
+        if (this.backgroundColor != null && this.title?.color == null) {
+            if (this.title == null) {
+                this.title = TextStyle()
+            }
+            this.title!!.color = if (backgroundColor.isLightColor())
+                TextColorStyle.black.normal
+            else
+                TextColorStyle.white.normal
+        }
+
+        self.title?.apply(view)
+        return view
+    }
+
+    fun title(builder: TextStyle.()->Unit) {
+        if (this.title == null) {
+            this.title = TextStyle()
+        }
+        builder(this.title!!)
+    }
+}
 
 
 /* ======================================================= */
@@ -55,24 +92,13 @@ val ButtonStyle.Companion.roundedRect: ButtonStyle
         return ButtonStyle(
             backgroundColor = colors.primary,
             strokeColor = Color.TRANSPARENT,
-            textColor = Color.WHITE,
-            radius = 4F
+            radius = 4F,
+            title = TextStyle(
+                color = TextColorStyle.white.normal,
+            )
         )
     }
 
-fun <V: TextView> ButtonStyle.apply(view: V): V {
-    val self = this
-    view.background {
-        color = self.backgroundColor ?: color
-        radius = view.dip(self.radius ?: 0F)
-        stroke {
-            color = self.strokeColor ?: color
-            width = view.dip(0.5F)
-        }
-    }
-    self.textColor?.let { view.setTextColor(it) }
-    return view
-}
 
 fun <V: TextView> V.withDefaultStyle(): V {
     ButtonStyle.default.apply(this)

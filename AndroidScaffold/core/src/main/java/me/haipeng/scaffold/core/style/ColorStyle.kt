@@ -78,7 +78,10 @@ private val lightDividerColor = "#1FFFFFFF".color
 /**
  * 判断一个颜色是亮色还是暗色。
  */
-fun Int.isLightColor(): Boolean {
+fun Int?.isLightColor(): Boolean {
+    if (this == null) {
+        return false
+    }
     val lightness = (0.299 * red + 0.587 * green + 0.114 * blue) / 255
     return lightness >= 0.5
 }

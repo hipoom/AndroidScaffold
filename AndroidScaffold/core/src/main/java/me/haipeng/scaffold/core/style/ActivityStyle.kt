@@ -11,6 +11,10 @@ import androidx.appcompat.widget.Toolbar
  */
 open class ActivityStyle {
 
+    /* ======================================================= */
+    /* Fields                                                  */
+    /* ======================================================= */
+
     /**
      * 标题栏
      */
@@ -34,6 +38,12 @@ open class ActivityStyle {
     fun statusBar(scope: StatusBarStyle.()->Unit) {
         scope(statusBarStyle)
     }
+
+
+
+    /* ======================================================= */
+    /* Public Methods                                          */
+    /* ======================================================= */
 
     fun apply(activity: AppCompatActivity, toolbar: Toolbar) {
         toolbarStyle.apply(activity, toolbar)
