@@ -14,6 +14,7 @@ import androidx.appcompat.widget.LinearLayoutCompat
 import androidx.appcompat.widget.Toolbar
 import me.haipeng.scaffold.core.R
 import me.haipeng.scaffold.core.style.*
+import me.haipeng.scaffold.core.style.widgets.TextViewStyle
 import java.util.*
 import java.util.concurrent.atomic.AtomicInteger
 import kotlin.collections.HashMap

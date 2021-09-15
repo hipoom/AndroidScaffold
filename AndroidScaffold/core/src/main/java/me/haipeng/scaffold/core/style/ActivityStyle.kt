@@ -4,6 +4,7 @@ package me.haipeng.scaffold.core.style
 
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import me.haipeng.scaffold.core.style.widgets.ToolbarStyle
 
 /**
  * @author ZhengHaiPeng

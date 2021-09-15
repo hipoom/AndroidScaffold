@@ -1,10 +1,11 @@
 @file:Suppress("SpellCheckingInspection", "unused")
 
-package me.haipeng.scaffold.core.style
+package me.haipeng.scaffold.core.style.widgets
 
 import android.graphics.Color
 import android.widget.TextView
 import androidx.annotation.Px
+import me.haipeng.scaffold.core.style.*
 
 /**
  * 按钮的风格。

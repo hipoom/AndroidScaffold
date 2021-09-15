@@ -1,7 +1,8 @@
-package me.haipeng.scaffold.core.style
+package me.haipeng.scaffold.core.style.widgets
 
 import android.view.View
 import androidx.annotation.Px
+import me.haipeng.scaffold.core.style.BackgroundStyle
 
 /**
  * @author ZhengHaiPeng

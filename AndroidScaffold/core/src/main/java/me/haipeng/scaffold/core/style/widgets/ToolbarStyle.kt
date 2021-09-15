@@ -1,6 +1,6 @@
 @file:Suppress("SpellCheckingInspection", "MemberVisibilityCanBePrivate")
 
-package me.haipeng.scaffold.core.style
+package me.haipeng.scaffold.core.style.widgets
 
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
@@ -8,6 +8,7 @@ import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
 import com.google.android.material.R
 import me.haipeng.scaffold.core.drawable.setColorFilterCompat
+import me.haipeng.scaffold.core.style.*
 
 
 /**
