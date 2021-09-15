@@ -9,11 +9,9 @@ import android.view.ViewGroup
 import android.view.ViewGroup.LayoutParams.MATCH_PARENT
 import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
 import android.widget.Button
-import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.widget.LinearLayoutCompat
 import androidx.appcompat.widget.Toolbar
-import androidx.core.view.marginTop
 import me.haipeng.scaffold.core.R
 import me.haipeng.scaffold.core.style.*
 import java.util.*
@@ -138,7 +136,7 @@ class ButtonsActivity : AppCompatActivity() {
         }
     }
 
-    class ButtonInfo: ButtonStyle() {
+    class ButtonInfo: TextViewStyle() {
         var onClick: (()->Unit)? = null
 
         fun onClick(block: ()->Unit) {

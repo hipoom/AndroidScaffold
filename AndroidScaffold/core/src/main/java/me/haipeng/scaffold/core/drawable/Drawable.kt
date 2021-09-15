@@ -33,7 +33,7 @@ fun drawable(initializer: DrawableBuilder.()->Unit): GradientDrawable {
  * 创建一个点击后有水波纹的 Drawable。
  *
  * @param color 水波纹的颜色
- * @param radii 圆角半径
+ * @param radii 圆角半径，单位以 px 为标准。
  */
 fun Drawable.createRippleDrawable(@ColorInt color: Int = Color.parseColor("#20000000"),
                                   radii: FloatArray? = null): RippleDrawable {
