@@ -10,9 +10,12 @@ import android.view.ViewGroup.LayoutParams.MATCH_PARENT
 import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
 import android.widget.Button
 import android.widget.TextView
+import androidx.annotation.Dimension
+import androidx.annotation.Dimension.DP
 import androidx.appcompat.widget.LinearLayoutCompat
 import androidx.appcompat.widget.Toolbar
 import me.haipeng.scaffold.core.R
+import me.haipeng.scaffold.core.dimension.dip
 import me.haipeng.scaffold.core.style.*
 import me.haipeng.scaffold.core.style.widgets.TextViewStyle
 import java.util.*
@@ -116,11 +119,9 @@ class ButtonsActivity : AppCompatActivity() {
                 val button = Button(activity)
                 button.isAllCaps = false
                 activity.buttonsContainer.addView(button, MATCH_PARENT, WRAP_CONTENT)
-                buttonBuilder.margin?.let { margin ->
-                    val lp = button.layoutParams as ViewGroup.MarginLayoutParams
-                    lp.topMargin = margin
-                    button.layoutParams = lp
-                }
+                val lp = button.layoutParams as ViewGroup.MarginLayoutParams
+                lp.topMargin = button.dip(buttonBuilder.margin)
+                button.layoutParams = lp
                 it.apply(button)
             }
         }
@@ -145,6 +146,9 @@ class ButtonsActivity : AppCompatActivity() {
         }
 
         override fun <V : TextView> apply(view: V): V {
+            if (elevation == null) {
+                this.elevation = view.dip(4F)
+            }
             super.apply(view)
             onClick?.let { view.setOnClickListener { it() } }
             return view
@@ -174,7 +178,8 @@ class ButtonsActivity : AppCompatActivity() {
          * 按钮之间的间隔。
          * 这个值会被设置到每一个按钮的 marginTop 上。
          */
-        var margin: Int? = null
+        @Dimension(unit = DP)
+        var margin: Float = 16F
 
         fun button(info: ButtonInfo.()->Unit) {
             val temp = ButtonInfo()
