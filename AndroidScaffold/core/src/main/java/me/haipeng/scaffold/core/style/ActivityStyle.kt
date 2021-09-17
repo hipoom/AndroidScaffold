@@ -25,14 +25,6 @@ open class ActivityStyle {
     }
 
     /**
-     * 内容区域
-     */
-    private val bodyStyle = BodyStyle()
-    fun body(scope: BodyStyle.()->Unit) {
-        scope(bodyStyle)
-    }
-
-    /**
      * 状态栏
      */
     private val statusBarStyle = StatusBarStyle()
@@ -48,7 +40,6 @@ open class ActivityStyle {
 
     fun apply(activity: AppCompatActivity, toolbar: Toolbar) {
         toolbarStyle.apply(activity, toolbar)
-        bodyStyle.apply(activity)
         statusBarStyle.apply(activity)
     }
 
