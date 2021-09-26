@@ -65,7 +65,7 @@ open class TextViewStyle: ViewStyle {
     /* Public Methods                                          */
     /* ======================================================= */
 
-    open fun title(builder: TextStyle.()->Unit) {
+    open fun label(builder: TextStyle.()->Unit) {
         this.title = this.title ?: TextStyle()
         builder(this.title!!)
     }

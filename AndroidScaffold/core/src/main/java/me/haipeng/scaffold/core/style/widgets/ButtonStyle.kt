@@ -68,5 +68,9 @@ open class ButtonStyle : TextViewStyle {
         onClick?.let { button.setOnClickListener { it() } }
     }
 
+    fun onClick(block: ()->Unit) {
+        this.onClick = block
+    }
+
     companion object
 }

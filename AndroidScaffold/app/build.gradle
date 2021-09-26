@@ -1,6 +1,7 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
 
 android {
     compileSdkVersion 30
@@ -23,20 +24,49 @@ android {
         }
     }
 
-    dataBinding {
-        enabled = true
+    // 启用 DataBinding
+//    dataBinding {
+//        enabled = true
+//    }
+    // 启用 ComposeUI
+    buildFeatures {
+        compose true
+        dataBinding true
+    }
+    composeOptions {
+        kotlinCompilerVersion "1.5.21"
+        kotlinCompilerExtensionVersion '1.0.1'
+    }
+    // Kotlin 编译为 Java 8
+    kotlinOptions {
+        jvmTarget = "1.8"
     }
 }
 
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
-    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    implementation 'androidx.core:core-ktx:1.3.0'
-    implementation 'androidx.appcompat:appcompat:1.1.0'
-    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
-    implementation project(path: ':core')
+    implementation 'com.google.android.material:material:1.3.0'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 
+    implementation project(path: ':core')
+
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    implementation 'androidx.core:core-ktx:1.3.2'
+
+    implementation 'androidx.appcompat:appcompat:1.3.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
+
+
+    // Integration with activities
+    implementation 'androidx.activity:activity-compose:1.3.1'
+    // Compose Material Design
+    implementation 'androidx.compose.material:material:1.0.1'
+    // Animations
+    implementation 'androidx.compose.animation:animation:1.0.1'
+    // Tooling support (Previews, etc.)
+    implementation 'androidx.compose.ui:ui-tooling:1.0.1'
+    // Integration with ViewModels
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-compose:1.0.0-alpha07'
 }

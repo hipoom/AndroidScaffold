@@ -1,9 +1,12 @@
 @file:Suppress("SpellCheckingInspection")
 package me.haipeng.scaffold.core.style
 
+import android.database.Observable
 import android.util.TypedValue
 import android.widget.TextView
 import androidx.annotation.Px
+import androidx.lifecycle.LiveData
+import java.util.*
 
 /**
  * @author ZhengHaiPeng
@@ -14,6 +17,7 @@ open class TextStyle(
     var color : Int? = null,
     @Px
     var size:  Int? = null,
+    var dynamicText: LiveData<CharSequence>? = null
 ) {
     companion object
 
