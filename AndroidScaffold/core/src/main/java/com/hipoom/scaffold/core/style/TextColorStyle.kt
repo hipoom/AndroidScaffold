@@ -24,4 +24,18 @@ val TextColorStyle.Companion.black
 val TextColorStyle.Companion.white
     get() = TextColorStyle("#FFFFFF".color, "#B2FFFFFF".color, "#4CFFFFFF".color, "#1FFFFFFF".color)
 
+/**
+ * 获取某种背景颜色的推荐文字颜色。
+ */
+fun TextColorStyle.Companion.getRecommendedTextColor(@ColorInt backgroundColor: Int?): TextColorStyle {
+    if (backgroundColor.isLightColor()) {
+        return black
+    }
+    return white
+}
 
+/**
+ * 获取某种背景颜色的推荐文字颜色。
+ */
+internal val Int.normalTextColor: Int
+    get() = TextColorStyle.getRecommendedTextColor(this).normal

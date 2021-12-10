@@ -1,19 +1,14 @@
-@file:Suppress("SpellCheckingInspection")
-
-package com.hipoom.scaffold.core.drawable
+package com.hipoom.scaffold.core.style
 
 import android.graphics.Color
 import androidx.annotation.ColorInt
 import androidx.annotation.Px
 
 /**
- * 用于创建 Drawable 的边框信息。
- *
  * @author ZhengHaiPeng
- * @since 2021/9/8 12:05 AM
+ * @since 2021/9/14 21:34
  */
-class Stroke(
-
+class StrokeStyle(
     /**
      * 边框宽度
      */

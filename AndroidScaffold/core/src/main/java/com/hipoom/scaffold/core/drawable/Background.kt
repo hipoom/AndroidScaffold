@@ -13,7 +13,7 @@ import android.view.View
  * @param initializer Drawable 构建器
  */
 fun <T: View> T.background(needRipple : Boolean = true,
-                           rippleColor: Int = Color.parseColor("#20000000"),
+                           rippleColor: Int? = Color.parseColor("#20000000"),
                            initializer: DrawableBuilder.()->Unit): T {
 
     // 创建基本的背景
@@ -31,7 +31,7 @@ fun <T: View> T.background(needRipple : Boolean = true,
 
     // 生成 Ripple 并设为背景
     this.background = background.createRippleDrawable(
-        color = rippleColor,
+        color = rippleColor ?: Color.parseColor("#20000000"),
         radii = radii
     )
 

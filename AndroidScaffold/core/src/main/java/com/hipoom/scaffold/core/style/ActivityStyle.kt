@@ -4,12 +4,17 @@ package com.hipoom.scaffold.core.style
 
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import com.hipoom.scaffold.core.style.widgets.ToolbarStyle
 
 /**
  * @author ZhengHaiPeng
  * @since 2021/9/9 01:18
  */
 open class ActivityStyle {
+
+    /* ======================================================= */
+    /* Fields                                                  */
+    /* ======================================================= */
 
     /**
      * 标题栏
@@ -20,14 +25,6 @@ open class ActivityStyle {
     }
 
     /**
-     * 内容区域
-     */
-    private val bodyStyle = BodyStyle()
-    fun body(scope: BodyStyle.()->Unit) {
-        scope(bodyStyle)
-    }
-
-    /**
      * 状态栏
      */
     private val statusBarStyle = StatusBarStyle()
@@ -35,9 +32,14 @@ open class ActivityStyle {
         scope(statusBarStyle)
     }
 
+
+
+    /* ======================================================= */
+    /* Public Methods                                          */
+    /* ======================================================= */
+
     fun apply(activity: AppCompatActivity, toolbar: Toolbar) {
         toolbarStyle.apply(activity, toolbar)
-        bodyStyle.apply(activity)
         statusBarStyle.apply(activity)
     }
 

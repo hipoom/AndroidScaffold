@@ -41,7 +41,7 @@ class DrawableBuilder {
      * 复杂圆角。
      * 单独设置某一个角，或者某一个边的角。
      */
-    private var radiusBox: Radius? = null
+    internal var radiusBox: Radius? = null
 
 
 
