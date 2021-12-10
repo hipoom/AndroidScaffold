@@ -16,3 +16,22 @@ fun String.appendBlankStillSize(size: Int): String {
     }
     return sb.toString()
 }
+
+/**
+ * 将字符串转为对应的 ASCII 字节数组。
+ * 用途：
+ * 将「APK Sig Block 42」转为 [65, 80, 75, 32, 83, 105, 103, 32, 66, 108, 111, 99, 107, 32, 52, 50]
+ */
+fun String.toAsciiBytes(): ByteArray {
+    val bytes = ByteArray(length)
+    forEachIndexed { index, char ->
+        bytes[index] = char.code.toByte()
+    }
+    return bytes
+}
+
+
+fun main() {
+    val bytes = "APK Sig Block 42".toAsciiBytes()
+    println(bytes)
+}

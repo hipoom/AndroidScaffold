@@ -12,6 +12,7 @@ import java.lang.IllegalArgumentException
 import java.util.zip.ZipFile
 import com.hipoom.scaffold.core.java.ktx.readBytes
 import com.hipoom.scaffold.core.java.ktx.subArray
+import com.hipoom.scaffold.core.java.ktx.toCharSequence
 
 /**
  * 获取一个 zip 文件的 oCDR 起始位置的偏移量。
@@ -36,7 +37,6 @@ fun ByteArray.isEoCDRMagicNumber(): Boolean {
     }
     return this contentEquals byteArrayOf(80, 75, 5, 6)
 }
-
 
 /**
  * 读取文件的中央目录。
@@ -69,10 +69,30 @@ fun File.readEoCDR(): EoCDR? {
     )
 }
 
+/**
+ * 判断当前文件是否有V2签名
+ */
+fun File.hasAndroidV2Signature(eocdr: EoCDR?): Boolean {
+    val temp = eocdr ?: readEoCDR() ?: return false
+    val magicNumber = readBytes((temp.cdrOffset - 16).toLong(), 16).toCharSequence()
+    return (magicNumber == "APK Sig Block 42")
+}
+
 fun main() {
-    val file = File("/Users/zhp/Workspace/Github/AndroidCameraScaffold.zip")
-    val eocdr = file.readEoCDR() ?: return
-    println("eocdr的偏移量:${eocdr.offset}")
-    println("中央目录的大小:${eocdr.cdrSize}")
-    println("中央目录的偏移量:${eocdr.cdrOffset}")
+//    run {
+//        val file = File("/Users/zhp/Workspace/Github/AndroidCameraScaffold.zip")
+//        val eocdr = file.readEoCDR() ?: return
+//        println("eocdr的偏移量:${eocdr.offset}")
+//        println("中央目录的大小:${eocdr.cdrSize}")
+//        println("中央目录的偏移量:${eocdr.cdrOffset}")
+//    }
+
+    // 读取抖音的 apk sign block
+    run {
+        val file = File("/Users/zhp/Downloads/toutiao.apk")
+        val eocdr = file.readEoCDR() ?: return
+        println("eocdr的偏移量:${eocdr.offset}")
+        println("中央目录的大小:${eocdr.cdrSize}")
+        println("中央目录的偏移量:${eocdr.cdrOffset}")
+    }
 }
