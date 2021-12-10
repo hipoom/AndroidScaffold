@@ -18,24 +18,17 @@ import com.hipoom.scaffold.core.java.ktx.toCharSequence
  * 获取一个 zip 文件的 oCDR 起始位置的偏移量。
  * 获取异常时，返回 -1。
  */
-fun getEoCDROffset(file: File): Long {
+fun File.getEoCDROffset(): Long {
     try {
-        val zip = ZipFile(file)
+        val zip = ZipFile(this)
         val commentBytes = zip.comment?.toByteArray()
         val commentLength = commentBytes?.size ?: 0
         val eocdrLength = commentLength + 22
-        return file.length() - eocdrLength
+        return length() - eocdrLength
     } catch (e: Exception) {
         e.printStackTrace()
     }
     return -1
-}
-
-fun ByteArray.isEoCDRMagicNumber(): Boolean {
-    if (size != 4) {
-        return false
-    }
-    return this contentEquals byteArrayOf(80, 75, 5, 6)
 }
 
 /**
@@ -43,7 +36,7 @@ fun ByteArray.isEoCDRMagicNumber(): Boolean {
  */
 fun File.readEoCDR(): EoCDR? {
     // 获取 EoCDR 的偏移量
-    val offset = getEoCDROffset(this)
+    val offset = this.getEoCDROffset()
     // 读取整个 EoCDR
     val bytes = readBytes(offset)
     // 读取 EoCDR 开始位置的魔数
@@ -76,6 +69,13 @@ fun File.hasAndroidV2Signature(eocdr: EoCDR?): Boolean {
     val temp = eocdr ?: readEoCDR() ?: return false
     val magicNumber = readBytes((temp.cdrOffset - 16).toLong(), 16).toCharSequence()
     return (magicNumber == "APK Sig Block 42")
+}
+
+fun ByteArray.isEoCDRMagicNumber(): Boolean {
+    if (size != 4) {
+        return false
+    }
+    return this contentEquals byteArrayOf(80, 75, 5, 6)
 }
 
 fun main() {
