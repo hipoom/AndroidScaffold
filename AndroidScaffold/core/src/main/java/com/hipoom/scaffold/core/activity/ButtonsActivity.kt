@@ -11,7 +11,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import com.hipoom.scaffold.core.R
 import com.hipoom.scaffold.core.style.ActivityStyle
-import me.haipeng.scaffold.core.style.widgets.VerticalStyle
+import com.hipoom.scaffold.core.style.widgets.VerticalStyle
 import java.util.concurrent.atomic.AtomicInteger
 
 /**

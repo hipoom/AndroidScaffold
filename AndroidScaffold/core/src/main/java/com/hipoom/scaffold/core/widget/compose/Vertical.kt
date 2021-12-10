@@ -2,7 +2,7 @@ package com.hipoom.scaffold.core.widget.compose
 
 import android.content.Context
 import androidx.appcompat.widget.LinearLayoutCompat
-import me.haipeng.scaffold.core.widget.NonXmlViewGroup
+import com.hipoom.scaffold.core.widget.NonXmlViewGroup
 
 /**
  * 垂直布局。

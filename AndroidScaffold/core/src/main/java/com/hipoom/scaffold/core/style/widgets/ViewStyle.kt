@@ -7,7 +7,7 @@ import android.view.View
 import androidx.annotation.Dimension
 import androidx.annotation.Dimension.DP
 import com.hipoom.scaffold.core.style.BackgroundStyle
-import me.haipeng.scaffold.core.style.MarginStyle
+import com.hipoom.scaffold.core.style.MarginStyle
 
 /**
  * @author ZhengHaiPeng

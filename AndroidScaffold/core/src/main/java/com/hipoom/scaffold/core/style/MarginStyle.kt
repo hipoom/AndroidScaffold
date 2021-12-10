@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
 import androidx.annotation.Dimension
 import androidx.annotation.Dimension.DP
-import me.haipeng.scaffold.core.dimension.dip
+import com.hipoom.scaffold.core.dimension.dip
 
 /**
  * @author ZhengHaiPeng

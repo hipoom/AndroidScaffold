@@ -10,7 +10,7 @@ package com.hipoom.scaffold.core.style.widgets
 import android.content.Context
 import android.widget.TextView
 import com.hipoom.scaffold.core.style.BackgroundStyle
-import me.haipeng.scaffold.core.style.*
+import com.hipoom.scaffold.core.style.*
 
 /**
  * 按钮的风格。

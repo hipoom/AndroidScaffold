@@ -7,8 +7,8 @@ package com.hipoom.scaffold.core.style.widgets
 import android.content.Context
 import android.widget.Button
 import com.hipoom.scaffold.core.style.BackgroundStyle
-import me.haipeng.scaffold.core.style.MarginStyle
-import me.haipeng.scaffold.core.style.TextStyle
+import com.hipoom.scaffold.core.style.MarginStyle
+import com.hipoom.scaffold.core.style.TextStyle
 
 /**
  * 按钮的风格。

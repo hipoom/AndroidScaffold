@@ -87,8 +87,6 @@ fun ByteArray.bigEndianInt(): Int {
     }
 }
 
-
-
 /**
  * 小端
  */
@@ -139,7 +137,6 @@ fun ByteArray.toMyString(): String {
     return "原始16进制：${toUnsignedHexString()}, 转为int值：${littleEndianInt()}"
 }
 
-
 /**
  * 获取一段子数组。
  *
@@ -188,14 +185,12 @@ fun ByteArray.subArrayFrom(start: Int): ByteArray {
 
 }
 
-
 /**
  * 从一个位置开始，读取四个字节，并转为小端的int值
  */
 fun ByteArray.readLittleEndianIntFrom(start: Int): Int {
     return subArray(start, 4).littleEndianInt()
 }
-
 
 /**
  * 将数组转为16进制字符串

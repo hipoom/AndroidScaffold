@@ -7,7 +7,8 @@ import androidx.appcompat.widget.Toolbar
 
 import androidx.core.content.ContextCompat
 import com.google.android.material.R
-import me.haipeng.scaffold.core.style.TextStyle
+import com.hipoom.scaffold.core.drawable.setColorFilterCompat
+import com.hipoom.scaffold.core.style.*
 
 
 /**

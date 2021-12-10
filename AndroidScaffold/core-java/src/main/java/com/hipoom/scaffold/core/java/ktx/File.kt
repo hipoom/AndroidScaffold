@@ -1,9 +1,6 @@
 package com.hipoom.scaffold.core.java.ktx
 
-import java.io.File
-import java.io.FileOutputStream
-import java.io.OutputStream
-import java.io.RandomAccessFile
+import java.io.*
 
 /**
  * 覆盖掉文件中从 [offset] 开始，长度为 [bytes] 长度的一段数据。
@@ -123,4 +120,19 @@ fun File.ensureParentDirectory() {
     if (p != null && !p.exists()) {
         p.mkdirs()
     }
+}
+
+/**
+ * 读取文件从 [offset] 开始，长度为 [length] 的一段字节数组。
+ */
+fun File.readBytes(offset: Long, length: Int = 0): ByteArray {
+    var size = length
+    if (size <= 0) {
+        size = (this.length() - offset).toInt()
+    }
+    val buffer = ByteArray(size)
+    val fis = FileInputStream(this)
+    fis.skip(offset)
+    fis.read(buffer)
+    return buffer
 }
