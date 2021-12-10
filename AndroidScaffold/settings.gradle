@@ -1,3 +1,7 @@
 include ':core'
 include ':app'
 rootProject.name = "AndroidScaffold"
+include ':zip'
+include ':security-java'
+include ':security-android'
+include ':core-java'
