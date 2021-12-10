@@ -5,6 +5,7 @@ package com.hipoom.scaffold.zip
  * @author ZhengHaiPeng
  * @since 2021年12月11日00:20:56
  */
+import com.hipoom.scaffold.core.java.ktx.littleEndianInt
 import java.io.File
 import java.lang.Exception
 import java.lang.IllegalArgumentException
@@ -33,10 +34,13 @@ fun ByteArray.isEoCDRMagicNumber(): Boolean {
     if (size != 4) {
         return false
     }
-
     return this contentEquals byteArrayOf(80, 75, 5, 6)
 }
 
+
+/**
+ * 读取文件的中央目录。
+ */
 fun File.readEoCDR(): EoCDR? {
     // 获取 EoCDR 的偏移量
     val offset = getEoCDROffset(this)
@@ -49,31 +53,26 @@ fun File.readEoCDR(): EoCDR? {
     if (!isMagicNum) {
         return null
     }
+
     // 读取 cdr 的偏移量
-    val cdrSizeBytes = readBytes(offset + 12, 4)
+    val cdrSizeBytes = bytes.subArray(12, 4)
+    val cdrSize = cdrSizeBytes.littleEndianInt()
 
+    // 读取 cdr 的大小
+    val cdrOffsetBytes = bytes.subArray(16, 4)
+    val cdrOffset = cdrOffsetBytes.littleEndianInt()
 
-    return null
-}
-
-
-fun ByteArray.toLittleEndianLong(): Long {
-    if (size != 4 && size != 8) {
-        throw IllegalArgumentException("只支持4字节或者8字节的 ByteArray 转 Long")
-    }
-
-    return -1
+    return EoCDR(
+        offset = offset,
+        cdrOffset = cdrOffset,
+        cdrSize = cdrSize
+    )
 }
 
 fun main() {
-//    val file = File("/Users/zhp/Documents/tencent-map.apk")
-//    val offset = getEoCDROffset(file)
-//    println("offset = $offset");
-//    val bytes = readBytes(file, offset)
-//
-//    val magicNumber = bytes.sub(0, 4)
-//    val isMagicNum = magicNumber.isEoCDRMagicNumber()
-//    println("isMagicNum = $isMagicNum")
-//
-//    file.readEoCDR()
+    val file = File("/Users/zhp/Workspace/Github/AndroidCameraScaffold.zip")
+    val eocdr = file.readEoCDR() ?: return
+    println("eocdr的偏移量:${eocdr.offset}")
+    println("中央目录的大小:${eocdr.cdrSize}")
+    println("中央目录的偏移量:${eocdr.cdrOffset}")
 }

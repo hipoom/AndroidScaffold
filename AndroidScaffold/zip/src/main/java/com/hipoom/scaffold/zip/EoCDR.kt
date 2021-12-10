@@ -14,10 +14,10 @@ class EoCDR(
     /**
      * 中央目录开始位置，相对于文件的开始位置 的偏移量。
      */
-    val cdrOffset: Long,
+    val cdrOffset: Int,
 
     /**
      * 中央目录的大小
      */
-    val cdrSize: Long
+    val cdrSize: Int
 )
