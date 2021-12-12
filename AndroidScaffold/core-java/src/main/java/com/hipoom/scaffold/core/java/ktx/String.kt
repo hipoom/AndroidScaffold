@@ -30,6 +30,19 @@ fun String.toAsciiBytes(): ByteArray {
     return bytes
 }
 
+/**
+ * 将字符串数组拼接为一个字符串，中间用 [delimiter] 分隔。
+ */
+fun List<String>.join(delimiter: String): String {
+    return joinToString(delimiter)
+}
+
+/**
+ * 将字符串数组拼接为一个字符串，中间用 [delimiter] 分隔。
+ */
+fun Array<String>.join(delimiter: String): String {
+    return joinToString(delimiter)
+}
 
 fun main() {
     val bytes = "APK Sig Block 42".toAsciiBytes()

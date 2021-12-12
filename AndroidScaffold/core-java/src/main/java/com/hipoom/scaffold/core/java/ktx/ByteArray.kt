@@ -5,16 +5,18 @@ import java.lang.StringBuilder
 import java.nio.ByteBuffer
 import java.nio.ByteOrder
 
-fun main() {
-    val bytes = byteArrayOf(72, 73, 74, 75)
+/**
+ * 往数组的末尾追加0，直到长度大于等于 [size].
+ */
+fun ByteArray.appendZeroUntilSize(size: Int): ByteArray {
+    if (this.size >= size) {
+        return this
+    }
 
-    println(bytes.toUnsignedHexString())
-    println(bytes.toCharSequence())
-    println(byteArrayOf(80, 75, 5, 6).littleEndianInt())
-//    println(byteArrayOf(127).littleEndianInt())
-//
-//    println(byteArrayOf(1, -1).toUnsignedHexString())
-//    println(byteArrayOf(1, 127).littleEndianInt())
+    val res = ByteArray(size)
+    this.copyInto(res)
+
+    return res
 }
 
 /**
@@ -53,12 +55,7 @@ fun ByteArray.littleEndianInt(): Int {
         return 0
     }
 
-    val temp = when(size) {
-        1 -> byteArrayOf(this[0], 0, 0, 0)
-        2 -> byteArrayOf(this[0], this[1], 0, 0)
-        3 -> byteArrayOf(this[0], this[1], this[2], 0)
-        else -> this
-    }
+    val temp = appendZeroUntilSize(4)
     return ByteBuffer.wrap(temp)
         .order(ByteOrder.LITTLE_ENDIAN)
         .int
@@ -91,23 +88,14 @@ fun ByteArray.bigEndianInt(): Int {
  * 小端
  */
 fun ByteArray.littleEndianLong(): Long {
-    require(this.size <= 8) { "暂不支持大于 32 位的 byte 数组转 Long 值。" }
-
-    val sb = StringBuilder()
-    for (i in size - 1 downTo 0) {
-        sb.append(this[i].toUnsignedHexString())
+    if (this.isEmpty()) {
+        return 0
     }
 
-    try {
-        return sb.toString().toLong(16)
-    } catch (e: Exception) {
-        println("===>")
-        forEach {
-            println("${it.toInt().toChar()}/$it/${it.toUnsignedHexString()}")
-        }
-        println("<===")
-        throw e
-    }
+    val temp = appendZeroUntilSize(8)
+    return ByteBuffer.wrap(temp)
+        .order(ByteOrder.LITTLE_ENDIAN)
+        .long
 }
 
 /**

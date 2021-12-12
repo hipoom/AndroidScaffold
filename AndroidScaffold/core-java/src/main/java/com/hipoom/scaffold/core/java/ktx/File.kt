@@ -94,7 +94,7 @@ fun File.copyHeadBytes(length: Int, dest: File): FileOutputStream {
 }
 
 /**
- * 删除文件从 [start] 位置开始，长度为 [length] 的数据，并保存到新文件 [dest]
+ * 删除文件从 [start] 位置开始(包含)，长度为 [length] 的数据，并保存到新文件 [dest]
  * 对于文件 [0, 1, 2, 3, 4, 5, 6, 7]， deleteSegment(3, 2, x) 后，还剩余：
  * [0, 1, 2, 5, 6, 7]。
  */

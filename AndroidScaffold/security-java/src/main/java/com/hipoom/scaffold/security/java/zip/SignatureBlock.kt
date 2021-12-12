@@ -1,3 +1,5 @@
+@file:Suppress("unused")
+
 package com.hipoom.scaffold.security.java.zip
 
 import com.hipoom.scaffold.core.java.ktx.*
@@ -92,7 +94,7 @@ class IDAndValue(
 /**
  * 读取字节数组，生成一个签名块。
  */
-fun SignatureBlock.Companion.read(bytes: ByteArray): SignatureBlock? {
+fun SignatureBlock.Companion.parse(bytes: ByteArray): SignatureBlock? {
     if (bytes.size < 16) {
         return null
     }
@@ -138,34 +140,4 @@ fun SignatureBlock.Companion.read(bytes: ByteArray): SignatureBlock? {
         magic = magic,
         pairs = idValues
     )
-}
-
-
-fun main() {
-    val bytes = SignatureBlock("Hipoom Zip Sign!", listOf(
-        IDAndValue(931114, "This is Hipoom".toAsciiBytes())
-    )).build()
-
-//    val file = File("/Users/zhp/Downloads/toutiao.apk")
-//    val eocdr = file.readEoCDR() ?: return
-//    println("eocdr的偏移量:${eocdr.offset}")
-//    println("中央目录的大小:${eocdr.cdrSize}")
-//    println("中央目录的偏移量:${eocdr.cdrOffset}")
-
-//    val signBlockSize = file.readBytes((eocdr.cdrOffset - 16 - 8).toLong(), 8).littleEndianLong()
-//    val signBlockBytes = file.readBytes(eocdr.cdrOffset - signBlockSize - 8, (signBlockSize + 8).toInt())
-
-    val block = SignatureBlock.read(bytes)
-    block?.idValues?.forEach {
-        // V2 签名
-        if (it.id == 0x7109871a) {
-            return@forEach
-        }
-
-        println("ID    : ${it.id}")
-        println("Value : ${it.value.toCharSequence()}")
-        println()
-    }
-
-//    File("/Users/zhp/Workspace/SignBlock.hex").writeBytes(signBlockBytes)
 }
